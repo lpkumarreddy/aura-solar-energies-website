@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Solar Energies - Premium Solar Solutions | Kakinada, Rajamahendravaram, Yeleswaram</title>
+    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons for aesthetic vectors -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+     /* Custom styles for the trendy look and feel */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Light grey/white background */
+        }
+        /* Custom Color Definition for Tailwind */
+        :root {
+            --color-primary: #FF6B35; /* Orange/Red */
+            --color-secondary: #003D82; /* Dark Blue */
+            --color-accent: #2ecc71; /* Eco Green */
+        }
+
+        /* Hero Section Parallax Effect (Aesthetic touch) */
+        .hero-bg {
+            /* Watermark removed - Now just a plain placeholder image */
+            background-image: url('https://i0.wp.com/www.orbenergy.com/wp-content/uploads/2024/09/respv-900web.jpg?w=1170&ssl=1');
+            background-size: cover;
+            background-position: center 30%;
+            background-attachment: fixed;
+        }
+
+        /* Scroll Animation Class */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Hover Effect for Cards */
+        .card-hover:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 15px 30px rgba(0, 61, 130, 0.2);
+        }
+
+        /* Style for the fixed header */
+        .header-fixed {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Ensures the map iframe fills its container responsively */
+        .map-container {
+            position: relative;
+            padding-bottom: 75%; /* Aspect ratio 4:3 (75%) for mobile */
+            height: 0;
+            overflow: hidden;
+            border-radius: 1rem; /* Rounded corners for modern look */
+        }
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        /* Adjust for larger screens (e.g., desktop 16:9 ratio) */
+        @media (min-width: 768px) {
+            .map-container {
+                padding-bottom: 50%; /* Aspect ratio 2:1 (50%) for desktop */
+            }
+        }
+    </style>
+
+    <script>
+        // Custom Tailwind Configuration with Brand Colors
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': 'var(--color-primary)',
+                        'secondary': 'var(--color-secondary)',
+                        'accent': 'var(--color-accent)',
+                        // Product Card Colors
+                        'product-blue': '#003366',
+                        'product-red': '#8B0000',
+                        'product-green': '#006400',
+                        'product-orange': '#FFA500',
+                        'product-cyan': '#008080',
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body>
+
+    <!-- 
+        ============================================================
+        1. HEADER & NAVIGATION (Mobile-First)
+        ============================================================
+    -->
+    <header id="header" class="fixed top-0 z-50 w-full transition-all duration-300">
+        <!-- Top Contact Bar (Hidden on XS/SM, visible on MD+) -->
+        <div class="bg-secondary text-white py-2 text-center text-sm font-light hidden lg:block">
+            <div class="max-w-7xl mx-auto flex justify-center space-x-6">
+                <p>Kakinada | Rajamahendravaram | Yeleswaram</p>
+                <span>|</span>
+                <a href="tel:+918499916156" class="hover:text-primary transition">Call: 84999 16156 / 84999 75593</a>
+                <span>|</span>
+                <a href="mailto:aurasolarenergies9@gmail.com" class="hover:text-primary transition">Email: aurasolarenergies9@gmail.com</a>
+            </div>
+        </div>
+
+        <!-- Main Navigation Bar -->
+        <nav class="bg-white shadow-lg lg:shadow-none">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16 md:h-20">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a href="#home" class="flex items-center space-x-2 text-xl sm:text-2xl font-extrabold text-secondary">
+                            <span class="text-primary">Aura</span> Solar Energies
+                        </a>
+                    </div>
+                    
+                    <!-- Desktop Menu (Hidden on XS/SM/MD, visible on LG+) -->
+                    <div class="hidden lg:flex lg:space-x-8 items-center font-medium">
+                        <a href="#home" class="text-gray-700 hover:text-primary transition duration-300 py-5">Home</a>
+                        <a href="#about" class="text-gray-700 hover:text-primary transition duration-300 py-5">About Us</a>
+                        <a href="#industrial" class="text-gray-700 hover:text-primary transition duration-300 py-5">Industrial Solar</a>
+                        <a href="#commercial" class="text-gray-700 hover:text-primary transition duration-300 py-5">Commercial Solar</a>
+                        <a href="#residential" class="text-gray-700 hover:text-primary transition duration-300 py-5">Residential Solar</a>
+                        <a href="#gallery" class="text-gray-700 hover:text-primary transition duration-300 py-5">Gallery</a>
+                        <a href="#blogs" class="text-gray-700 hover:text-primary transition duration-300 py-5">Blogs</a>
+                        <button onclick="openWhatsApp()" class="bg-primary text-white px-5 py-2 rounded-full font-semibold shadow-lg hover:bg-opacity-90 transition duration-300 transform hover:scale-105 ml-4 flex items-center space-x-2">
+                            <i data-lucide="message-square-text" class="w-5 h-5"></i>
+                            <span>CONTACT</span>
+                        </button>
+                    </div>
+
+                    <!-- Mobile Menu Button (Visible on XS/SM/MD, hidden on LG+) -->
+                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100 transition duration-300">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (Shown as an overlay on XS/SM/MD) -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white shadow-xl">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
+                <a href="#home" class="block w-full text-center text-gray-700 hover:text-primary hover:bg-gray-50 p-2 rounded-md">Home</a>
+                <a href="#about" class="block w-full text-center text-gray-700 hover:text-primary hover:bg-gray-50 p-2 rounded-md">About Us</a>
+                <a href="#industrial" class="block w-full text-center text-gray-700 hover:text-primary hover:bg-gray-50 p-2 rounded-md">Industrial Solar</a>
+                <a href="#commercial" class="block w-full text-center text-gray-700 hover:text-primary hover:bg-gray-50 p-2 rounded-md">Commercial Solar</a>
+                <a href="#residential" class="block w-full text-center text-gray-700 hover:text-primary hover:bg-gray-50 p-2 rounded-md">Residential Solar</a>
+                <a href="#gallery" class="block w-full text-center text-gray-700 hover:text-primary hover:bg-gray-50 p-2 rounded-md">Gallery</a>
+                <a href="#blogs" class="block w-full text-center text-gray-700 hover:text-primary hover:bg-gray-50 p-2 rounded-md">Blogs</a>
+                <button onclick="openWhatsApp()" class="mt-3 bg-primary text-white w-full py-2 rounded-lg font-semibold shadow-md hover:bg-opacity-90 transition duration-300 flex justify-center items-center space-x-2">
+                    <i data-lucide="message-square-text" class="w-5 h-5"></i>
+                    <span>CONTACT</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <main class="pt-[64px] md:pt-[80px] lg:pt-[100px]">
+        
+        <!-- 
+            ============================================================
+            2. HERO SECTION (Responsive Typography and Layout)
+            ============================================================
+        -->
+        <section id="home" class="hero-bg h-[60vh] sm:h-[75vh] lg:h-screen flex flex-col justify-center items-center text-center relative overflow-hidden">
+            <!-- Overlay to darken background image and improve text contrast -->
+            <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+            
+            <div class="relative z-10 max-w-4xl px-4 sm:px-6">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-3 sm:mb-4 animate-pulse-slow">
+                    Powering Your Future with <span class="text-primary block">Premium Solar Energy</span>
+                </h1>
+                <p class="text-lg sm:text-xl md:text-2xl text-gray-200 mb-6 sm:mb-8 font-light fade-in-up">
+                    Transforming Andhra Pradesh with high-efficiency **Bifacial & Monocrystalline** solar solutions.
+                </p>
+                <!-- START: Updated/Minimized CTA Button -->
+                <a href="#contact" class="inline-block bg-primary text-white text-sm sm:text-base px-6 sm:px-8 py-2 sm:py-3 rounded-full font-bold shadow-lg shadow-primary/30 hover:bg-opacity-95 transition duration-500 transform hover:scale-105 fade-in-up delay-300">
+                    Get Free Consultation &rarr;
+                </a>
+                <!-- END: Updated/Minimized CTA Button -->
+            </div>
+            <!-- Quick Stats Banner (Stacked on mobile, row on desktop) -->
+            <div class="absolute bottom-0 w-full bg-secondary bg-opacity-90 py-3 md:py-4 lg:py-6 text-white">
+                <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+                    <div class="text-xl sm:text-2xl md:text-4xl font-extrabold mb-1 md:mb-0">
+                        20+ Complete Connections
+                    </div>
+                    <div class="text-sm sm:text-lg font-light flex flex-wrap justify-center space-x-2 sm:space-x-4">
+                        <span class="text-primary font-semibold hidden sm:inline">|</span>
+                        <span>RESIDENTIAL</span>
+                        <span class="text-primary font-semibold">|</span>
+                        <span>COMMERCIAL</span>
+                        <span class="text-primary font-semibold">|</span>
+                        <span>INDUSTRIAL</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+            ============================================================
+            3. ABOUT US SECTION (Mobile: Stacked, Desktop: Side-by-Side)
+            ============================================================
+        -->
+        <section id="about" class="py-16 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-8 lg:gap-10 items-center">
+                <div class="lg:w-1/2">
+                    <p class="text-primary font-bold uppercase mb-2">Our Mission & Expertise</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-secondary mb-4 sm:mb-6 fade-in-up">
+                        Your Trusted Partner for Complete Solar Solutions
+                    </h2>
+                    <p class="text-gray-600 mb-4 sm:mb-6 text-base sm:text-lg leading-relaxed fade-in-up delay-200">
+                        Aura Solar Energies is your trusted partner for complete solar energy solutions across **Kakinada, Rajamahendravaram, and Yeleswaram**. We are driven by a mission to deliver quality, reliability, and exceptional service in renewable energy.
+                    </p>
+                    
+                    <h3 class="text-xl sm:text-2xl font-semibold text-secondary mb-3 border-l-4 border-primary pl-3 fade-in-up delay-300">
+                        Bifacial & Monocrystalline Technology
+                    </h3>
+                    <p class="text-gray-600 mb-6 sm:mb-8 leading-relaxed fade-in-up delay-400">
+                        We specialize in high-efficiency Bifacial and Monocrystalline solar modules, ensuring maximum power generation and durability. Our technology is designed to reduce energy bills and provide long-term power independence for commercial and residential applications.
+                    </p>
+                    
+                    <a href="#contact" class="bg-secondary text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-semibold hover:bg-opacity-80 transition duration-300 fade-in-up delay-500">
+                        Consult Our Experts
+                    </a>
+                </div>
+                
+                <div class="lg:w-1/2 relative">
+                    <img src="https://res.cloudinary.com/djnscc5bg/image/upload/v1763097662/Aura_solar_energies_zcnppy.jpg" alt="Aura Solar Energies Headquarters" class="rounded-xl shadow-2xl transform transition-transform duration-500 hover:scale-[1.02] fade-in-up delay-300">
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+            ============================================================
+            4. SERVICES (Mobile: 1 Col, Tablet: 3 Col)
+            ============================================================
+        -->
+        <section id="services-area" class="py-16 md:py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <p class="text-primary font-bold uppercase mb-2">Sector Focus</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-secondary mb-8 sm:mb-12 fade-in-up">
+                    End-to-End Solutions for Every Requirement
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                    
+                    <div id="industrial" class="group bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-gray-100 card-hover transition duration-500 fade-in-up">
+                        <i data-lucide="factory" class="w-10 h-10 sm:w-12 sm:h-12 text-primary mx-auto mb-3 sm:mb-4 group-hover:rotate-6 transition duration-300"></i>
+                        <h3 class="text-xl sm:text-2xl font-bold text-secondary mb-2 sm:mb-3">Industrial Solar</h3>
+                        <p class="text-gray-600 text-sm">
+                            Powering large-scale operations, factories, and warehouses. Customized PV module distribution and mounting structure manufacturing for maximum capacity and ROI.
+                        </p>
+                    </div>
+
+                    <div id="commercial" class="group bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-gray-100 card-hover transition duration-500 fade-in-up delay-200">
+                        <i data-lucide="building-2" class="w-10 h-10 sm:w-12 sm:h-12 text-primary mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition duration-300"></i>
+                        <h3 class="text-xl sm:text-2xl font-bold text-secondary mb-2 sm:mb-3">Commercial Solar</h3>
+                        <p class="text-gray-600 text-sm">
+                            Solutions for Hospitals, Schools, Offices, and commercial complexes. Reduce operating costs with reliable energy storage and rooftop safety systems.
+                        </p>
+                    </div>
+
+                    <div id="residential" class="group bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-gray-100 card-hover transition duration-500 fade-in-up delay-400">
+                        <i data-lucide="home" class="w-10 h-10 sm:w-12 sm:h-12 text-primary mx-auto mb-3 sm:mb-4 group-hover:translate-y-[-5px] transition duration-300"></i>
+                        <h3 class="text-xl sm:text-2xl font-bold text-secondary mb-2 sm:mb-3">Residential Solar</h3>
+                        <p class="text-gray-600 text-sm">
+                            Bringing the future of energy home. Expert consultation and end-to-end installation of high-quality solar components for durable, cost-saving household power.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+            ============================================================
+            5. PRODUCTS GALLERY (Mobile: 2 Col, Desktop: 4 Col)
+            ============================================================
+        -->
+        <section id="products" class="py-16 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <p class="text-primary font-bold uppercase mb-2">Quality Inventory</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-secondary mb-8 sm:mb-12 fade-in-up">
+                    Exclusive Partner Solar Ecosystem
+                </h2>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                    
+                    <!-- Product Card: Solar Panels (Dark Blue) -->
+                    <div class="group relative overflow-hidden rounded-xl shadow-xl bg-product-blue p-4 sm:p-6 text-white card-hover transition duration-500 fade-in-up">
+                        <i data-lucide="panel-left-open" class="w-6 h-6 sm:w-8 sm:h-8 absolute top-3 right-3 sm:top-4 sm:right-4 text-white/50 group-hover:scale-125 transition duration-500"></i>
+                        <h3 class="text-base sm:text-xl font-bold mb-1 mt-6 sm:mt-8">Solar Panels</h3>
+                        <p class="text-xs sm:text-sm font-light">Sri Savithar Solar - Authorized Channel Partner. Bifacial/Mono Crystal.</p>
+                    </div>
+
+                    <!-- Product Card: Solar Inverters/Cables (Dark Red/Black) -->
+                    <div class="group relative overflow-hidden rounded-xl shadow-xl bg-product-red p-4 sm:p-6 text-white card-hover transition duration-500 fade-in-up delay-100">
+                        <i data-lucide="plug" class="w-6 h-6 sm:w-8 sm:h-8 absolute top-3 right-3 sm:top-4 sm:right-4 text-white/50 group-hover:scale-125 transition duration-500"></i>
+                        <h3 class="text-base sm:text-xl font-bold mb-1 mt-6 sm:mt-8">Solar Inverters & Cables</h3>
+                        <p class="text-xs sm:text-sm font-light">Polycab Solar Cables - Authorized Distributor. High-grade connection.</p>
+                    </div>
+
+                    <!-- Product Card: Junction Boxes (Green) -->
+                    <div class="group relative overflow-hidden rounded-xl shadow-xl bg-product-green p-4 sm:p-6 text-white card-hover transition duration-500 fade-in-up delay-200">
+                        <i data-lucide="box" class="w-6 h-6 sm:w-8 sm:h-8 absolute top-3 right-3 sm:top-4 sm:right-4 text-white/50 group-hover:scale-125 transition duration-500"></i>
+                        <h3 class="text-base sm:text-xl font-bold mb-1 mt-6 sm:mt-8">Junction Boxes</h3>
+                        <p class="text-xs sm:text-sm font-light">Geesys - Authorized Distributor. Premium safety features.</p>
+                    </div>
+
+                    <!-- Product Card: PV Connectors (Orange/Yellow) -->
+                    <div class="group relative overflow-hidden rounded-xl shadow-xl bg-product-orange p-4 sm:p-6 text-secondary card-hover transition duration-500 fade-in-up delay-300">
+                        <i data-lucide="link" class="w-6 h-6 sm:w-8 sm:h-8 absolute top-3 right-3 sm:top-4 sm:right-4 text-secondary/50 group-hover:scale-125 transition duration-500"></i>
+                        <h3 class="text-base sm:text-xl font-bold mb-1 mt-6 sm:mt-8">PV Connectors</h3>
+                        <p class="text-xs sm:text-sm font-medium">Elcom - Authorized Distributor. Reliable and robust connections.</p>
+                    </div>
+                    
+                    <!-- Product Card: Mounting Structures (Yellow/Orange) -->
+                    <div class="group relative overflow-hidden rounded-xl shadow-xl bg-yellow-600 p-4 sm:p-6 text-white card-hover transition duration-500 fade-in-up">
+                        <i data-lucide="hard-hat" class="w-6 h-6 sm:w-8 sm:h-8 absolute top-3 right-3 sm:top-4 sm:right-4 text-white/50 group-hover:scale-125 transition duration-500"></i>
+                        <h3 class="text-base sm:text-xl font-bold mb-1 mt-6 sm:mt-8">Mounting Structures</h3>
+                        <p class="text-xs sm:text-sm font-light">BOS Products. Precision engineered, durable installation.</p>
+                    </div>
+
+                    <!-- Product Card: Lightning & Earthing (Cyan/Blue) -->
+                    <div class="group relative overflow-hidden rounded-xl shadow-xl bg-product-cyan p-4 sm:p-6 text-white card-hover transition duration-500 fade-in-up delay-100">
+                        <i data-lucide="zap" class="w-6 h-6 sm:w-8 sm:h-8 absolute top-3 right-3 sm:top-4 sm:right-4 text-white/50 group-hover:scale-125 transition duration-500"></i>
+                        <h3 class="text-base sm:text-xl font-bold mb-1 mt-6 sm:mt-8">Lightning & Earthing</h3>
+                        <p class="text-xs sm:text-sm font-light">Crucial safety components and certifications for protection.</p>
+                    </div>
+
+                    <!-- Product Card: Rooftop Safety (Multi-color - White/Gray) -->
+                    <div class="group relative overflow-hidden rounded-xl shadow-xl bg-gray-100 p-4 sm:p-6 text-secondary card-hover transition duration-500 fade-in-up delay-200">
+                        <i data-lucide="shield-check" class="w-6 h-6 sm:w-8 sm:h-8 absolute top-3 right-3 sm:top-4 sm:right-4 text-secondary/50 group-hover:scale-125 transition duration-500"></i>
+                        <h3 class="text-base sm:text-xl font-bold mb-1 mt-6 sm:mt-8">Rooftop Safety</h3>
+                        <p class="text-xs sm:text-sm font-medium">FRP Walkways, Handrails, Solar Cleaning Kits for maintenance.</p>
+                    </div>
+
+                    <!-- Product Card: Energy Storage (Featured - Secondary Blue) -->
+                    <div class="group relative overflow-hidden rounded-xl shadow-xl bg-secondary p-4 sm:p-6 text-white card-hover transition duration-500 fade-in-up delay-300">
+                        <i data-lucide="battery-charging" class="w-6 h-6 sm:w-8 sm:h-8 absolute top-3 right-3 sm:top-4 sm:right-4 text-white/50 group-hover:scale-125 transition duration-500"></i>
+                        <h3 class="text-base sm:text-xl font-bold mb-1 mt-6 sm:mt-8">Energy Storage</h3>
+                        <p class="text-xs sm:text-sm font-light">Hybrid Inverters and Battery Storage Solutions. Power independence.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+            ============================================================
+            6. WHY CHOOSE US (Mobile: 1 Col, Tablet: 2 Col, Desktop: 4 Col)
+            ============================================================
+        -->
+        <section id="why-choose" class="py-16 md:py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <p class="text-primary font-bold uppercase mb-2">Our Competitive Edge</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-secondary mb-8 sm:mb-12 fade-in-up">
+                    Bringing the Future of Energy to You
+                </h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                    
+                    <div class="p-6 bg-white rounded-xl shadow-xl transition-all duration-300 transform hover:shadow-2xl fade-in-up">
+                        <i data-lucide="truck" class="w-8 h-8 sm:w-10 sm:h-10 text-primary mb-3"></i>
+                        <h3 class="text-lg sm:text-xl font-bold text-secondary mb-2">Faster Deliveries</h3>
+                        <p class="text-gray-600 text-sm">Reduced lead times with localized stock availability and efficient logistics.</p>
+                    </div>
+                    
+                    <div class="p-6 bg-white rounded-xl shadow-xl transition-all duration-300 transform hover:shadow-2xl fade-in-up delay-100">
+                        <i data-lucide="award" class="w-8 h-8 sm:w-10 sm:h-10 text-primary mb-3"></i>
+                        <h3 class="text-lg sm:text-xl font-bold text-secondary mb-2">High-Quality Inventory</h3>
+                        <p class="text-gray-600 text-sm">Robust stocking of components from top solar brands and authorized distributors.</p>
+                    </div>
+                    
+                    <div class="p-6 bg-white rounded-xl shadow-xl transition-all duration-300 transform hover:shadow-2xl fade-in-up delay-200">
+                        <i data-lucide="users" class="w-8 h-8 sm:w-10 sm:h-10 text-primary mb-3"></i>
+                        <h3 class="text-lg sm:text-xl font-bold text-secondary mb-2">Expert Consultation</h3>
+                        <p class="text-gray-600 text-sm">End-to-end product guidance and support for optimal system design.</p>
+                    </div>
+                    
+                    <div class="p-6 bg-white rounded-xl shadow-xl transition-all duration-300 transform hover:shadow-2xl fade-in-up delay-300">
+                        <i data-lucide="map-pin" class="w-8 h-8 sm:w-10 sm:h-10 text-primary mb-3"></i>
+                        <h3 class="text-lg sm:text-xl font-bold text-secondary mb-2">Strategic Accessibility</h3>
+                        <p class="text-gray-600 text-sm">Well-connected hubs (Kakinada, Rajamahendravaram, Yeleswaram) for hassle-free procurement.</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+            ============================================================
+            7. GALLERY SECTION
+            ============================================================
+        -->
+        <section id="gallery" class="py-16 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="text-primary font-bold uppercase text-center mb-2">Project Showcase</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-secondary text-center mb-8 sm:mb-12 fade-in-up">
+                    Our Successful Installations
+                </h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                    <!-- Placeholder Gallery Images (Watermarks removed) -->
+                    <div class="rounded-xl overflow-hidden shadow-lg transform hover:scale-[1.03] transition duration-500 fade-in-up">
+                        <img src="https://www.tatapower.com/content/dam/tatapoweraemsitesprogram/tatapower/news---media/tata-power-blogs/ghar-ghar-solar-initiative-lighting-up-india/Thumbnail.png" alt="Residential Solar Project" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="rounded-xl overflow-hidden shadow-lg transform hover:scale-[1.03] transition duration-500 fade-in-up delay-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlOhJQIQltq0JDgF52C4bdDznenRqkwuc7YQ&s" alt="Commercial Solar Project" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="rounded-xl overflow-hidden shadow-lg transform hover:scale-[1.03] transition duration-500 fade-in-up delay-200">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnqblGb0uI5MT7UCqhjkTKfem11vYDNtXXzQ&s" alt="Industrial Solar Project" class="w-full h-auto object-cover">
+                    </div>
+                </div>
+                <p style="color: #FF6B35; text-align: end; margin-top: 1rem; font-weight: bold;">more...</p>
+            </div>
+        </section>
+
+        <!-- 
+            ============================================================
+            8. BLOGS SECTION
+            ============================================================
+        -->
+        <section id="blogs" class="py-16 md:py-24 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="text-primary font-bold uppercase text-center mb-2">Knowledge Hub</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-secondary text-center mb-8 sm:mb-12 fade-in-up">
+                    Latest Insights from Aura Solar
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                    <!-- Placeholder Blog Posts -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 fade-in-up">
+                        <h3 class="text-xl font-bold text-secondary mb-2">Choosing Bifacial vs. Monocrystalline</h3>
+                        <p class="text-gray-600 text-sm">A deep dive into the technology differences and which panel is right for your location in Andhra Pradesh.</p>
+                        <a href="#" class="text-primary font-semibold mt-3 inline-block hover:underline">Read More &rarr;</a>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 fade-in-up delay-100">
+                        <h3 class="text-xl font-bold text-secondary mb-2">The Importance of Polycab Solar Cables</h3>
+                        <p class="text-gray-600 text-sm">Understanding how quality cabling impacts the long-term efficiency and safety of your solar investment.</p>
+                        <a href="#" class="text-primary font-semibold mt-3 inline-block hover:underline">Read More &rarr;</a>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 fade-in-up delay-200">
+                        <h3 class="text-xl font-bold text-secondary mb-2">Solar Earthing and BOS Components Explained</h3>
+                        <p class="text-gray-600 text-sm">Essential guide to safety measures: Lightning Arrestors, Earthing Rods, and BOS components.</p>
+                        <a href="#" class="text-primary font-semibold mt-3 inline-block hover:underline">Read More &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 
+            ============================================================
+            9. LOCATION MAP (New Section)
+            ============================================================
+        -->
+        <section id="location" class="py-16 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="text-primary font-bold uppercase text-center mb-2">Find Us</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-secondary text-center mb-8 sm:mb-12 fade-in-up">
+                    Our Service Hubs in Andhra Pradesh
+                </h2>
+                
+                <!-- Responsive Map Container -->
+                <div class="map-container shadow-2xl fade-in-up delay-100">
+                    <!-- Embedded map showing the general region of Kakinada, Rajamahendravaram, Yeleswaram -->
+                    <!-- This iframe uses a common embed for the region. -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119280.70876403988!2d82.01257404396328!3d17.027090886616466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a493a3994d521d9%3A0xc3c94840e6c5332!2sKakinada%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1700030000000!5m2!1sen!2sin" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                
+                <div class="text-center mt-8 text-lg text-gray-600 fade-in-up delay-200">
+                    <p>Proudly serving Kakinada, Rajamahendravaram, and Yeleswaram with local presence.</p>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- 
+        ============================================================
+        10. FOOTER & CONTACT SECTION (Stacked on mobile, spread on desktop)
+        ============================================================
+    -->
+    <footer id="contact" class="bg-secondary py-12 sm:py-16 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+            
+            <!-- Company Info -->
+            <div>
+                <h3 class="text-xl sm:text-2xl font-extrabold text-primary mb-4">Aura Solar Energies</h3>
+                <p class="text-gray-300 mb-4 text-sm">
+                    Bringing the future of energy to you. Your trusted partner for quality solar solutions across Andhra Pradesh.
+                </p>
+                <button onclick="openWhatsApp()" class="bg-primary text-white px-6 py-2 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 flex items-center space-x-2">
+                    <i data-lucide="whatsapp" class="w-5 h-5"></i>
+                    <span>Chat Now</span>
+                </button>
+            </div>
+            
+            <!-- Quick Links -->
+            <div>
+                <h4 class="text-lg sm:text-xl font-semibold mb-4 border-b border-primary/50 pb-2">Quick Links</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#home" class="hover:text-primary transition">Home</a></li>
+                    <li><a href="#about" class="hover:text-primary transition">About Us</a></li>
+                    <li><a href="#products" class="hover:text-primary transition">Products</a></li>
+                    <li><a href="#gallery" class="hover:text-primary transition">Gallery</a></li>
+                    <li><a href="#blogs" class="hover:text-primary transition">Blogs</a></li>
+                </ul>
+            </div>
+            
+            <!-- Contact Info -->
+            <div>
+                <h4 class="text-lg sm:text-xl font-semibold mb-4 border-b border-primary/50 pb-2">Get in Touch</h4>
+                <div class="space-y-3 text-sm">
+                    <p class="flex items-start space-x-2">
+                        <i data-lucide="phone" class="w-4 h-4 mt-1 text-primary flex-shrink-0"></i>
+                        <span>+91 84999 16156 / 84999 75593</span>
+                    </p>
+                    <p class="flex items-start space-x-2">
+                        <i data-lucide="mail" class="w-4 h-4 mt-1 text-primary flex-shrink-0"></i>
+                        <a href="mailto:aurasolarenergies9@gmail.com" class="hover:text-primary">aurasolarenergies9@gmail.com</a>
+                    </p>
+                    <p class="flex items-start space-x-2">
+                        <i data-lucide="map-pin" class="w-4 h-4 mt-1 text-primary flex-shrink-0"></i>
+                        <span>Kakinada | Rajamahendravaram | Yeleswaram</span>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Services -->
+            <div>
+                <h4 class="text-lg sm:text-xl font-semibold mb-4 border-b border-primary/50 pb-2">Our Services</h4>
+                <ul class="space-y-2 text-sm">
+                    <li>Solar PV Module Distribution</li>
+                    <li>Mounting Structure Manufacturing</li>
+                    <li>Earthing and BOS Components</li>
+                    <li>End-to-end Installation</li>
+                </ul>
+            </div>
+            
+        </div>
+        
+        <!-- Updated Copyright Line -->
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-xs sm:text-sm text-gray-400">
+            &copy; <span id="current-year"></span> Aura Solar Energies. All Rights Reserved. Designed by O2O.agency
+        </div>
+    </footer>
+<script>
+    // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 1. WhatsApp Chat Functionality
+        const openWhatsApp = () => {
+            const phoneNumber = '918499916156'; // 91 for India, followed by the number
+            const message = encodeURIComponent("Hello Aura Solar Energies, I would like a free consultation regarding solar installation.");
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        };
+
+        // 2. Fixed Header/Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('header-fixed');
+            } else {
+                header.classList.remove('header-fixed');
+            }
+        });
+        
+        // 3. Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when a link is clicked
+        const mobileLinks = mobileMenu.querySelectorAll('a, button');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // 4. Scroll Reveal Animation (using Intersection Observer)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, {
+            threshold: 0.1, // Element is considered visible when 10% is in view
+        });
+
+        document.querySelectorAll('.fade-in-up').forEach(element => {
+            observer.observe(element);
+        });
+
+        // 5. Set Current Year in Footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+    
+</body>
+</html>
